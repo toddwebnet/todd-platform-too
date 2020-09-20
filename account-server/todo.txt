@@ -1,0 +1,34 @@
+Paths to create
+
+Login
+Logout
+Reset password
+incorporate mailgun
+
+
+
+add/update/delete user
+get user
+search/list users
+
+add/update/delete app
+get app
+search/list users
+
+add/update role
+search/list roles
+get role
+
+add/update/delete userapp/permissions
+get userapp/permissions
+search/list userapp/permissions
+
+Cache permissions
+delete cache on update/delete
+
+
+
+
+
+
+

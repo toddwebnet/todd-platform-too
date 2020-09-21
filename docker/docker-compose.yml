@@ -1,0 +1,156 @@
+version: '3'
+
+services:
+
+### Reverse Proxy  ##########################################
+  proxy:
+    build:
+      context: ${DOCKER_PATH}/proxy
+      args:
+        - NGINX_DOCKERFILE_SOURCE=${NGINX_DOCKERFILE_SOURCE}
+    volumes:
+      - ${DATA_PATH_HOST}/logs/proxy:/var/log/nginx
+      - ${DOCKER_PATH}/proxy/ssl:/etc/nginx/ssl
+      - ${DOCKER_PATH}/proxy/sites-available:/etc/nginx/sites-available
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - 'adminer'
+    networks:
+      network:
+        aliases:
+          - adminer.tpt.com
+
+### adminer develpment tools  ##########################################
+  adminer:
+    image: adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql
+    restart: always
+    ports:
+      - ${ADMINER_PORT}:8080
+    networks:
+      - network
+
+
+  # beanstalkd:
+  #   build: ./beanstalkd
+  #   ports:
+  #     - "11300:11300"
+  #   privileged: true
+  #   networks:
+  #     - network
+
+  # workspace:
+  #   build:
+  #     context: ${DOCKER_PATH}/workspace
+  #     args:
+  #       - PHP_DOCKERFILE_SOURCE=${PHP_DOCKERFILE_SOURCE}
+  #   volumes:
+  #     - ${APP_PATH}:/var/www
+  #   tty: true
+  #   networks:
+  #     - network
+  #
+  # supervisor:
+  #   build:
+  #     context: ${DOCKER_PATH}/supervisor
+  #     args:
+  #       - PHP_DOCKERFILE_SOURCE=${PHP_DOCKERFILE_SOURCE}
+  #   volumes:
+  #     - ${APP_PATH}:/var/www
+  #     - ./supervisor/supervisord.d:/etc/supervisord.d
+  #   tty: true
+  #   networks:
+  #     - network
+
+  # wc-api:
+  #   build:
+  #     context: ${DOCKER_PATH}/nginx
+  #     args:
+  #       - PHP_UPSTREAM_CONTAINER=${PHP_UPSTREAM_CONTAINER}
+  #       - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
+  #   volumes:
+  #     - ${APP_PATH}/src/webcrawler/devops/sites:/etc/nginx/sites-available
+  #     - ./nginx/ssl/:/etc/nginx/ssl
+  #     - ${APP_PATH}:/var/www
+  #   ports:
+  #     - "${NGINX_HOST_HTTP_PORT}:80"
+  #     - "${NGINX_HOST_HTTPS_PORT}:443"
+  #   depends_on:
+  #     - php-fpm
+  #   networks:
+  #     - network
+
+  # php-fpm:
+  #   build:
+  #     context: ${DOCKER_PATH}/php-fpm
+  #     args:
+  #       - PHP_FPM_DOCKERFILE_SOURCE=${PHP_FPM_DOCKERFILE_SOURCE}
+  #       - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
+  #   volumes:
+  #     - ${APP_PATH}:/var/www
+  #   expose:
+  #     - "9000"
+  #   networks:
+  #     - network
+
+
+  # cron:
+  #   build:
+  #     context: ${DOCKER_PATH}/cron
+  #     args:
+  #       - PHP_DOCKERFILE_SOURCE=${PHP_DOCKERFILE_SOURCE}
+  #   volumes:
+  #     - ${APP_PATH}:/var/www
+  #     - ./cron/crontab:/etc/cron.d
+  #   tty: true
+  #   networks:
+  #     - network
+
+
+  # minio:
+  #   build:
+  #     context: ${DOCKER_PATH}/minio
+  #     args:
+  #       - MINIO_DOCKERFILE_SOURCE=${MINIO_DOCKERFILE_SOURCE}
+  #   ports:
+  #     - 9000:9000
+  #   volumes:
+  #     - ${DATA_PATH_HOST}/mino/data:/export
+  #     - ${DATA_PATH_HOST}/minio/config:/root/.minio
+  #   environment:
+  #     MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+  #     MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+  #   networks:
+  #     - network
+
+  # mysql:
+  #   build:
+  #     context: ${DOCKER_PATH}/mysql
+  #     args:
+  #       - MYSQL_DOCKERFILE_SOURCE=${MYSQL_DOCKERFILE_SOURCE}
+  #       - TZ=${TIMEZONE}
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #     - TZ=${TIMEZONE}
+  #   volumes:
+  #     - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+  #     - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+  #   ports:
+  #     - "${MYSQL_PORT}:3306"
+  #   networks:
+  #     - network
+
+
+# volumes:
+#   minio:
+#     driver: local
+#   mysql:
+#     driver: ${VOLUMES_DRIVER}
+
+networks:
+  network:
+    driver: ${NETWORKS_DRIVER}

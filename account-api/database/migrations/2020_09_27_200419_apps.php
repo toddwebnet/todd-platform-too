@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class Apps extends Migration
 {
@@ -14,11 +14,11 @@ class Apps extends Migration
     public function up()
     {
         Schema::create('apps', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('appCode');
-            $table->string('appName');
-            $table->text('appDescription');
-            $table->boolean('isActive')->default(true);
+            $table->id();
+            $table->string('app_code');
+            $table->string('app_name');
+            $table->text('app_descr');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

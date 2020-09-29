@@ -97,6 +97,23 @@ services:
     networks:
       - network
 
+  session-api:
+    build:
+      context: ${DOCKER_PATH}/nginx
+      args:
+        - PHP_UPSTREAM_CONTAINER=${PHP_UPSTREAM_CONTAINER}
+        - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
+    volumes:
+      - ${APP_PATH}/docker/_devops/nginx/session-api.conf:/etc/nginx/sites-available/default.conf
+      - ./nginx/ssl/:/etc/nginx/ssl
+      - ${APP_PATH}:/var/www
+    ports:
+      - "82:82"
+      - "445:445"
+    depends_on:
+      - php-fpm
+    networks:
+      - network
 
   # cron:
   #   build:
@@ -127,6 +144,7 @@ services:
   #   networks:
   #     - network
 
+### MySQL ################################################
   mysql:
     build:
       context: ${DOCKER_PATH}/mysql
@@ -144,7 +162,17 @@ services:
     networks:
       - network
 
-
+### Redis ################################################
+  redis:
+    build:
+      context: ${DOCKER_PATH}/redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - '${DATA_PATH_HOST}/redis:/data'
+      - ${DATA_PATH_HOST}/logs/redis:/var/log/redis/
+    networks:
+      - network
 # volumes:
 #   minio:
 #     driver: local

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb693375e55620f2d8455321df136e3d",
+    "content-hash": "7b56bfb5d21eaae286e532c3ed2f8941",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4581,42 +4581,6 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2020-07-13T06:12:54+00:00"
-        },
-        {
-            "name": "toddwebnet/apis",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/toddwebnet/ToddPlatformApis.git",
-                "reference": "7be88d77e44ff72a21b538bc11d053e764e8690d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/toddwebnet/ToddPlatformApis/zipball/7be88d77e44ff72a21b538bc11d053e764e8690d",
-                "reference": "7be88d77e44ff72a21b538bc11d053e764e8690d",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ToddWebNet\\Apis\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "James Todd",
-                    "email": "toddwebnet@gmail.com"
-                }
-            ],
-            "description": "apis",
-            "support": {
-                "source": "https://github.com/toddwebnet/ToddPlatformApis/tree/master",
-                "issues": "https://github.com/toddwebnet/ToddPlatformApis/issues"
-            },
-            "time": "2020-09-29T17:27:56+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

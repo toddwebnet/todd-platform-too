@@ -15,13 +15,17 @@ class SessionController extends Controller
         $this->sessionService = new SessionService();
     }
 
-    public function start()
+    public function start(Request $request)
     {
+        $dataSet = $request->post();
         $token = $this->sessionService->generateNewToken();
-        $this->sessionService->setKey($token, json_encode([]));
+        $this->sessionService->setKey($token, json_encode($dataSet));
         $this->sessionService->bumpExpire($token);
         return Response(
-            ['token' => $token],
+            [
+                'token' => $token,
+                'value' => json_decode($this->sessionService->getKey($token))
+            ],
             Response::HTTP_OK
         );
     }

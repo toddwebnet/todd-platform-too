@@ -50,6 +50,7 @@ services:
         - PHP_DOCKERFILE_SOURCE=${PHP_DOCKERFILE_SOURCE}
     volumes:
       - ${APP_PATH}:/var/www
+      - ${APP_PATH}/../:/var/projects
     tty: true
     networks:
       - network

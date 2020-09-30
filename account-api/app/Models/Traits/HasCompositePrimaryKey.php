@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Traits; // *** Adjust this to match your model namespace! ***
+namespace App\Models\Traits; // *** Adjust this to match your model namespace! ***
 
 use Illuminate\Database\Eloquent\Builder;
 

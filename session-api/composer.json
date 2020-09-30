@@ -6,10 +6,13 @@
     "type": "project",
     "require": {
         "php": "^7.3",
-        "laravel/lumen-framework": "^8.0"
+        "fzaninotto/faker": "^1.9.1",
+        "illuminate/redis": "^8.7",
+        "laravel/lumen-framework": "^8.0",
+        "predis/predis": "^1.1",
+        "vetruvet/laravel-phpredis": "^1.0"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
         "phpunit/phpunit": "^9.3"
     },

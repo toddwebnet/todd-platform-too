@@ -80,8 +80,8 @@ services:
       - ./nginx/ssl/:/etc/nginx/ssl
       - ${APP_PATH}:/var/www
     ports:
-      - "81:81"
-      - "444:444"
+      - "8100:8100"
+      #- "444:444"
     depends_on:
       - php-fpm
     networks:
@@ -111,8 +111,44 @@ services:
       - ./nginx/ssl/:/etc/nginx/ssl
       - ${APP_PATH}:/var/www
     ports:
-      - "82:82"
-      - "445:445"
+      - "8102:8102"
+      #- "445:445"
+    depends_on:
+      - php-fpm
+    networks:
+      - network
+
+  admin-app:
+    build:
+      context: ${DOCKER_PATH}/nginx
+      args:
+        - PHP_UPSTREAM_CONTAINER=${PHP_UPSTREAM_CONTAINER}
+        - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
+    volumes:
+      - ${APP_PATH}/docker/_devops/nginx/admin-app.conf:/etc/nginx/sites-available/default.conf
+      - ./nginx/ssl/:/etc/nginx/ssl
+      - ${APP_PATH}:/var/www
+    ports:
+      - "8103:8103"
+      #- "445:445"
+    depends_on:
+      - php-fpm
+    networks:
+      - network
+
+  login-app:
+    build:
+      context: ${DOCKER_PATH}/nginx
+      args:
+        - PHP_UPSTREAM_CONTAINER=${PHP_UPSTREAM_CONTAINER}
+        - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
+    volumes:
+      - ${APP_PATH}/docker/_devops/nginx/login-app.conf:/etc/nginx/sites-available/default.conf
+      - ./nginx/ssl/:/etc/nginx/ssl
+      - ${APP_PATH}:/var/www
+    ports:
+      - "8101:8101"
+      #  - "446:446"
     depends_on:
       - php-fpm
     networks:

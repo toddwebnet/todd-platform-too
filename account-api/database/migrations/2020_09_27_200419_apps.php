@@ -17,6 +17,7 @@ class Apps extends Migration
             $table->id();
             $table->string('app_code');
             $table->string('app_name');
+            $table->string('app_url');
             $table->text('app_descr');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

@@ -3,7 +3,7 @@ server {
     server_name account.tpt.com;
     location / {
         rewrite ^/pma(/.*)$ $1 break;
-        proxy_pass http://host.docker.internal:81;
+        proxy_pass http://host.docker.internal:8100;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -23,7 +23,7 @@ server {
   server_name account.tpt.com;
   location / {
       rewrite ^/pma(/.*)$ $1 break;
-      proxy_pass http://host.docker.internal:81;
+      proxy_pass http://host.docker.internal:8100;
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection 'upgrade';

@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Response('ok', 200);
 });
+
+Route::post('/authenticate', 'AccountController@authenticate');

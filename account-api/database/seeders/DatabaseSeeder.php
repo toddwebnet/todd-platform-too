@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
 
         $app = [
-            'app_code' => 'toadwart',
-            'app_name' => 'Toad Wart',
-            'app_descr' => $faker->paragraph,
+            'app_code' => 'account_admin',
+            'app_name' => 'Account Administration',
+            'app_url'  => 'http://admin.tpt.com',
+            'app_descr' => 'Administrate users, apps and roles',
         ];
         $appRoles =
             [
@@ -29,8 +30,8 @@ class DatabaseSeeder extends Seeder
                     'role_name' => 'Administrator'
                 ],
                 [
-                    'role_code' => 'staff',
-                    'role_name' => 'Staff'
+                    'role_code' => 'readonly',
+                    'role_name' => 'Read Only'
                 ],
 
             ];
@@ -41,13 +42,13 @@ class DatabaseSeeder extends Seeder
                 'role_code' => 'admin',
             ],
             [
-                'email' => 'staff@tpt.com',
+                'email' => 'readonly@tpt.com',
                 'password' => 'password',
-                'role_code' => 'staff',
+                'role_code' => 'readonly',
             ]
         ];
         $this->addToTable('apps', $app);
-        $appId = DB::select('select id from apps where app_code=?', ['toadwart'])[0]->id;
+        $appId = DB::select('select id from apps where app_code=?', ['account_admin'])[0]->id;
         foreach ($appRoles as $appRole) {
             $appRole['app_id'] = $appId;
             $this->addToTable('app_roles', $appRole);

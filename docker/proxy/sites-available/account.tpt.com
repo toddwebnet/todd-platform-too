@@ -32,13 +32,13 @@ server {
       proxy_set_header Host $host;
       proxy_cache_bypass $http_upgrade;
 
-       add_header "Access-Control-Allow-Origin"  *;
+       # add_header "Access-Control-Allow-Origin"  *;
 
 
      # Preflighted requests
      if ($request_method = OPTIONS ) {
-       add_header "Access-Control-Allow-Methods" "GET, POST, OPTIONS, HEAD";
-       add_header "Access-Control-Allow-Headers" "Authorization, Origin, X-Requested-With, Content-Type, Accept";
+    #    add_header "Access-Control-Allow-Methods" "GET, POST, OPTIONS, HEAD";
+        add_header "Access-Control-Allow-Headers" "Authorization, Origin, X-Requested-With, Content-Type, Accept";
      }
 
   }

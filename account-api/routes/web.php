@@ -18,6 +18,5 @@ use App\Http\Controllers\AccountController;
 Route::get('/', function () {
     return Response('ok', 200);
 });
-
 Route::post('/authenticate', [AccountController::class, 'authenticate']);
 Route::get('/test', [AccountController::class, 'test']);

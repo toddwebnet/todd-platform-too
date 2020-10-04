@@ -31,5 +31,9 @@ server {
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header Host $host;
       proxy_cache_bypass $http_upgrade;
+      # Preflighted requests
+      if ($request_method = OPTIONS ) {
+         add_header "Access-Control-Allow-Headers" "Authorization, Origin, X-Requested-With, Content-Type, Accept";
+      }      
   }
 }

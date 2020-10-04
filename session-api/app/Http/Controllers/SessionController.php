@@ -53,9 +53,10 @@ class SessionController extends Controller
 
     public function setKey(Request $request, $key)
     {
+
         return $this->checkTokenThenDo($request, function ($token) use ($request, $key) {
             $dataSet = json_decode($this->sessionService->getKey($token));
-            $dataSet->{$key} = $request->post('value');
+            $dataSet->{$key} = $request->post();
             $this->sessionService->setKey($token, json_encode($dataSet));
             $this->sessionService->bumpExpire($token);
             return Response(

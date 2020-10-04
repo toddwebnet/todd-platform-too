@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-class Person extends ActiveModel
+use Illuminate\Database\Eloquent\Model;
+
+class Person extends Model
 {
+    protected $table = 'persons';
     protected $fillable = [
         'user_id',
         'first_name',

@@ -13,7 +13,6 @@ import './config.js'
 
 window.axios = require('axios');
 
-
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 

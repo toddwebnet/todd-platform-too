@@ -10,10 +10,17 @@ use GuzzleHttp\Psr7\Response;
 class BaseApi
 {
 
+    /** @var string */
     protected $baseUrl;
+    /** @var array  */
     protected $auth = [];
+    /** @var array  */
     protected $lastCallLog = [];
 
+    /**
+     * BaseApi constructor.
+     * @param string $baseUrl
+     */
     public function __construct(string $baseUrl = '')
     {
         $this->setBaseUrl(rtrim($baseUrl, '/'));
@@ -52,6 +59,7 @@ class BaseApi
      */
     protected function call(string $method, string $path, $params = null, array $options = [])
     {
+
         $this->lastCallLog = [];
         //Set base options
         if (!array_key_exists('headers', $options)) {

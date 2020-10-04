@@ -47,20 +47,31 @@ export default {
     };
   },
   methods: {
-    created: function(){
-      alert('I got created');
+    showMessage: function (message) {
     },
     loginProc: function (e) {
       e.preventDefault();
+      const url = config.accountApiHost + '/authenticate'
+      this.$parent.changeState('loading');
+      this.$parent.hideError();
       axios
-          .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-          .then(function(response) {
-            alert(JSON.stringify(response));
+          .post(url, this.loginForm)
+          .then(response => {
+            // this.$cookies.set('token',response.data.token, null, null, config.domain);
+            document.location = redirectUrl;
+
+          })
+          .catch(error => {
+            this.$parent.showError(error.response.data.message);
+          })
+          .then(()=> {
+            this.$parent.changeState('ready');
+
           });
 
 
     },
-    changePasswordClick: function(){
+    changePasswordClick: function () {
       alert("Some Day We will do this?");
     }
   }

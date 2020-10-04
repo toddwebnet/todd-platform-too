@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\AccountController;
+
 Route::get('/', function () {
     return Response('ok', 200);
 });
 
-Route::post('/authenticate', 'AccountController@authenticate');
+Route::post('/authenticate', [AccountController::class, 'authenticate']);
+Route::get('/test', [AccountController::class, 'test']);

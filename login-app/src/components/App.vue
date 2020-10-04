@@ -13,12 +13,18 @@
             </span>
             Sign In
           </h3>
+          <div class="justify-content-center login-error"
+               v-if="showErrorInd"
+               v-text="errorMessage"
+          ></div>
         </div>
         <div class="card-body">
           <LoginForm :state="state"></LoginForm>
         </div>
       </div>
+
     </div>
+
   </div>
 </template>
 
@@ -31,12 +37,23 @@ export default {
   data: function () {
     return {
       state: 'ready',
+      showErrorInd: false,
+      errorMessage: ''
     };
   },
   methods: {
     changeState: function (stateValue) {
       this.state = stateValue;
     },
+    showError: function (errorMessage) {
+      this.showErrorInd = true;
+      this.errorMessage = errorMessage;
+    },
+    hideError: function () {
+      this.errorMessage = '';
+      this.showErrorInd = false;
+    }
+
   }
 }
 </script>

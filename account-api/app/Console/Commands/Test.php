@@ -12,10 +12,15 @@ class Test extends Command
 
     public function handle()
     {
-        /** @var SessionApi $api */
-        $api = app()->make(SessionApi::class);
+        $sessionApi = new SessionApi();
+        $results = $sessionApi->createSession(['admin'=>['key1' => 'goober']]);
+        $token = $results['token'];
+        $adminSession = $sessionApi->getSession($token, 'admin');
+
+        $adminSession['newKey'] = 'what';
         dump(
-            $api->createSession()
+          $sessionApi->setSessionValue($token, 'admin', $adminSession)
         );
+
     }
 }

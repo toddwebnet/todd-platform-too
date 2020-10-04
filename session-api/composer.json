@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
         "fzaninotto/faker": "^1.9.1",
         "illuminate/redis": "^8.7",
         "laravel/lumen-framework": "^8.0",

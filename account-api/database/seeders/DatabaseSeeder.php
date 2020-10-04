@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,12 +39,12 @@ class DatabaseSeeder extends Seeder
         $users = [
             [
                 'email' => 'admin@tpt.com',
-                'password' => 'password',
+                'password' => Hash::make('password'),
                 'role_code' => 'admin',
             ],
             [
                 'email' => 'readonly@tpt.com',
-                'password' => 'password',
+                'password' => Hash::make('password'),
                 'role_code' => 'readonly',
             ]
         ];

@@ -42,6 +42,11 @@ class SessionService
         app('redis')->expire('session:' . $token, 60 * 30);
     }
 
+    public function endSession($token)
+    {
+        app('redis')->expire('session:' . $token, -1);
+    }
+
     public function exists($token)
     {
 

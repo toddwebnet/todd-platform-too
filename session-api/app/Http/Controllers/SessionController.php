@@ -81,4 +81,22 @@ class SessionController extends Controller
 
     }
 
+    public function ping(Request $request)
+    {
+        return $this->checkTokenThenDo($request, function ($token) {
+            $this->sessionService->bumpExpire($token);
+            return Response(
+                ['valid' => true],
+                Response::HTTP_OK
+            );
+        });
+    }
+
+    public function end(Request $request)
+    {
+        return $this->checkTokenThenDo($request, function ($token) {
+            $this->sessionService->bumpExpire($token);
+            return Response('', Response::HTTP_OK);
+        });
+    }
 }

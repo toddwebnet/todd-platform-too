@@ -19,6 +19,8 @@ $router->get('/', function () use ($router) {
 
 $router->get('/start', 'SessionController@start');
 $router->post('/start', 'SessionController@start');
+$router->get('/ping', 'SessionController@ping');
 $router->get('/get', 'SessionController@get');
 $router->post('/set/{key}', 'SessionController@setKey');
 $router->post('/set', 'SessionController@setSet');
+$router->post('/end', 'SessionController@end');

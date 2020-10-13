@@ -41,6 +41,13 @@ export default {
       errorMessage: ''
     };
   },
+  created: function(){
+    let token = this.$cookies.get('token');
+    if(token !== null){
+
+    }
+    //this.$cookies.get('token')
+  },
   methods: {
     changeState: function (stateValue) {
       this.state = stateValue;

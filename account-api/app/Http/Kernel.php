@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Cors;
 use App\Http\Middleware\EncryptCookies;
 use Fruitcake\Cors\HandleCors;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;

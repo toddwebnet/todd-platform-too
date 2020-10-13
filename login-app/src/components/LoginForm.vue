@@ -57,7 +57,8 @@ export default {
       axios
           .post(url, this.loginForm)
           .then(response => {
-            // this.$cookies.set('token',response.data.token, null, null, config.domain);
+            this.$cookies.set('token',response.data.token, null, null, config.domain);
+            alert('hi');
             document.location = redirectUrl;
 
           })

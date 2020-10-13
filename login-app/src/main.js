@@ -14,7 +14,8 @@ import './config.js'
 window.axios = require('axios');
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios
+// Vue.prototype.$http = axios
+Vue.use(require('vue-cookies'))
 
 new Vue({
     render: h => h(App),

@@ -1,9 +1,1 @@
 .env
-beanstalkd
-cron
-mino
-mysql
-nginx
-php-fpm
-supervisor
-workspace

@@ -1,0 +1,5 @@
+
+
+
+* * * * * /usr/local/bin/php /var/www/src/webCrawler/artisan pop-url >> /var/log/cron.log
+# * * * * * /bin/echo "foobar" >> /var/log/cron.log

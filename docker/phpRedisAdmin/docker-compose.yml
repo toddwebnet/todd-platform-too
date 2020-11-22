@@ -1,0 +1,7 @@
+phpredisadmin:
+  build: .
+  environment:
+    - REDIS_1_HOST=devpe
+    - REDIS_1_PORT=6379  
+  ports:
+    - "8081:80"

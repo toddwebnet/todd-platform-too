@@ -50,6 +50,8 @@ RUN apt-get install default-libmysqlclient-dev -y
 RUN apt-get install default-mysql-client -y
 RUN apt-get install default-libmysqlclient-dev -y
 
+RUN apt-get install redis-tools -y
+
 RUN  apt-get clean
 
 

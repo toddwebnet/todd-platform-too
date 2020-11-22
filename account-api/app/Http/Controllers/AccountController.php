@@ -12,6 +12,7 @@ class AccountController extends Controller
 {
     public function authenticate(Request $request)
     {
+
         /** @var AccountService $accountService */
         $accountService = app()->make(AccountService::class);
 

@@ -37,12 +37,14 @@ services:
       - network
 
   phpredisadmin:
-    build: .
+    build:  ${DOCKER_PATH}/phpRedisAdmin
     environment:
-      - REDIS_1_HOST=devpe
+      - REDIS_1_HOST=redis
       - REDIS_1_PORT=6379
     ports:
       - "8092:80"
+    networks:
+      - network
 
   # beanstalkd:
   #   build: ./beanstalkd
@@ -52,6 +54,24 @@ services:
   #   networks:
   #     - network
 
+
+  php-fpm:
+    build:
+      context: ${DOCKER_PATH}/php-fpm
+      args:
+        - PHP_FPM_DOCKERFILE_SOURCE=${PHP_FPM_DOCKERFILE_SOURCE}
+        - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
+    volumes:
+      - ${APP_PATH}:/var/www
+      - ${APP_PATH}/docker/_devops/configs/account-api.env:/var/www/account-api/.env
+      - ${APP_PATH}/docker/_devops/configs/session-api.env:/var/www/session-api/.env
+      # - ${APP_PATH}/docker/_devops/configs/login-app.config.js:/var/www/login-app/src/config.js
+    expose:
+      - "9000"
+    networks:
+      - network
+
+
   workspace:
     build:
       context: ${DOCKER_PATH}/workspace
@@ -60,6 +80,9 @@ services:
     volumes:
       - ${APP_PATH}:/var/www
       - ${APP_PATH}/../:/var/projects
+      - ${APP_PATH}/docker/_devops/configs/account-api.env:/var/www/account-api/.env
+      - ${APP_PATH}/docker/_devops/configs/session-api.env:/var/www/session-api/.env
+      # - ${APP_PATH}/docker/_devops/configs/login-app.config.js:/var/www/login-app/src/config.js
     tty: true
     networks:
       - network
@@ -86,6 +109,7 @@ services:
       - ${APP_PATH}/docker/_devops/nginx/account-api.conf:/etc/nginx/sites-available/default.conf
       - ./nginx/ssl/:/etc/nginx/ssl
       - ${APP_PATH}:/var/www
+      - ${APP_PATH}/docker/_devops/configs/account-api.env:/var/www/account-api/.env
     ports:
       - "8100:8100"
       #- "444:444"
@@ -94,18 +118,6 @@ services:
     networks:
       - network
 
-  php-fpm:
-    build:
-      context: ${DOCKER_PATH}/php-fpm
-      args:
-        - PHP_FPM_DOCKERFILE_SOURCE=${PHP_FPM_DOCKERFILE_SOURCE}
-        - PHP_UPSTREAM_PORT=${PHP_UPSTREAM_PORT}
-    volumes:
-      - ${APP_PATH}:/var/www
-    expose:
-      - "9000"
-    networks:
-      - network
 
   session-api:
     build:
@@ -117,6 +129,7 @@ services:
       - ${APP_PATH}/docker/_devops/nginx/session-api.conf:/etc/nginx/sites-available/default.conf
       - ./nginx/ssl/:/etc/nginx/ssl
       - ${APP_PATH}:/var/www
+      - ${APP_PATH}/docker/_devops/configs/session-api.env:/var/www/session-api/.env
     ports:
       - "8102:8102"
       #- "445:445"
@@ -153,6 +166,7 @@ services:
       - ${APP_PATH}/docker/_devops/nginx/login-app.conf:/etc/nginx/sites-available/default.conf
       - ./nginx/ssl/:/etc/nginx/ssl
       - ${APP_PATH}:/var/www
+      # - ${APP_PATH}/docker/_devops/configs/login-app.config.js:/var/www/login-app/src/config.js
     ports:
       - "8101:8101"
       #  - "446:446"
@@ -219,11 +233,6 @@ services:
       - ${DATA_PATH_HOST}/logs/redis:/var/log/redis/
     networks:
       - network
-# volumes:
-#   minio:
-#     driver: local
-#   mysql:
-#     driver: ${VOLUMES_DRIVER}
 
 networks:
   network:

@@ -30,7 +30,7 @@
       <a href="#"
          class="float-left forgot_password"
          @click='changePasswordClick'
-      >Forgot your password?</a>
+      >Forgot your passwordssss?</a>
     </div>
   </form>
 </template>
@@ -44,35 +44,35 @@ export default {
         email: '',
         password: '',
       }
-    };
+    }
   },
   methods: {
     showMessage: function (message) {
     },
     loginProc: function (e) {
-      e.preventDefault();
-      const url = config.accountApiHost + '/authenticate'
-      this.$parent.changeState('loading');
-      this.$parent.hideError();
+
+      e.preventDefault()
+      const url = config.accountApiPath + '/authenticate'
+      this.$parent.changeState('loading')
+      this.$parent.hideError()
       axios
           .post(url, this.loginForm)
           .then(response => {
-            this.$cookies.set('token',response.data.token, null, null, config.domain);
-            document.location = redirectUrl;
-
+            this.$cookies.set('token', response.data.token, null, null, config.domain)
+            document.location = redirectUrl
           })
           .catch(error => {
-            this.$parent.showError(error.response.data.message);
+            this.$parent.showError(error.response.data.message)
           })
-          .then(()=> {
-            this.$parent.changeState('ready');
+          .then(() => {
+            this.$parent.changeState('ready')
 
-          });
+          })
 
 
     },
     changePasswordClick: function () {
-      alert("Some Day We will do this?");
+      alert("Some Day We will do this?")
     }
   }
 }

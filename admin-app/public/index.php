@@ -8,6 +8,7 @@
     <script>
         $(document).ready(function () {
             token = getCookie('token');
+            alert(token);
             if (token !== '') {
                 loadUserPanel(token);
             }

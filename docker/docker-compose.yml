@@ -10,8 +10,8 @@ services:
         - NGINX_DOCKERFILE_SOURCE=${NGINX_DOCKERFILE_SOURCE}
     volumes:
       - ${DATA_PATH_HOST}/logs/proxy:/var/log/nginx
-      - ${DOCKER_PATH}/proxy/ssl:/etc/nginx/ssl
-      - ${DOCKER_PATH}/proxy/sites-available:/etc/nginx/sites-available
+      - ${DOCKER_PATH}/_devops/ssl:/etc/nginx/ssl
+      - ${DOCKER_PATH}/_devops/nginx/proxy:/etc/nginx/sites-available
     restart: always
     ports:
       - 80:80
@@ -83,6 +83,7 @@ services:
       - ${APP_PATH}/docker/_devops/configs/account-api.env:/var/www/account-api/.env
       - ${APP_PATH}/docker/_devops/configs/session-api.env:/var/www/session-api/.env
       # - ${APP_PATH}/docker/_devops/configs/login-app.config.js:/var/www/login-app/src/config.js
+
     tty: true
     networks:
       - network

@@ -1,3 +1,4 @@
-var config = {
-    accountApiPath: 'http://account.tpt.com'
+window.config = {
+    accountApiPath: 'https://account.tpt.com',
+    domain: 'tpt.com'
 };

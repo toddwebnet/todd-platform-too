@@ -30,7 +30,7 @@
       <a href="#"
          class="float-left forgot_password"
          @click='changePasswordClick'
-      >Forgot your passwordssss?</a>
+      >Forgot your password?</a>
     </div>
   </form>
 </template>
@@ -53,6 +53,7 @@ export default {
 
       e.preventDefault()
       const url = config.accountApiPath + '/authenticate'
+
       this.$parent.changeState('loading')
       this.$parent.hideError()
       axios

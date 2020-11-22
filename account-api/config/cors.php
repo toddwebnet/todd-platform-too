@@ -23,7 +23,9 @@ return [
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['content-type'],
+
+//                ->header('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type, X-Requested-With');
 
     'exposed_headers' => [],
 

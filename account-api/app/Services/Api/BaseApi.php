@@ -43,6 +43,7 @@ class BaseApi
     {
         $options = [
             'base_uri' => $this->baseUrl,
+            'verify' => false
         ];
         return new Client($options);
     }

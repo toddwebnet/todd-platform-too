@@ -36,6 +36,13 @@ services:
     networks:
       - network
 
+  phpredisadmin:
+    build: .
+    environment:
+      - REDIS_1_HOST=devpe
+      - REDIS_1_PORT=6379
+    ports:
+      - "8092:80"
 
   # beanstalkd:
   #   build: ./beanstalkd

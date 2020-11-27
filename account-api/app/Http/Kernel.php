@@ -43,7 +43,6 @@ class Kernel extends HttpKernel
             StartSession::class,
             ShareErrorsFromSession::class,
             SubstituteBindings::class,
-//            HandleCors::class,
         ],
 
         'api' => [

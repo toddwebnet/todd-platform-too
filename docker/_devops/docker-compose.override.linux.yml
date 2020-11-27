@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+
+  proxy:
+    environment:
+      - LINUX_HOST=true
